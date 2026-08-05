@@ -68,6 +68,30 @@ public class ContentService {
             .collect(Collectors.toList());
     }
 
+    // updating video key with S3 key for the video after video-service uploads the movie to S3
+    public void updateVideoKey(String movieId, String videoKey) {
+        log.info("updateVideoKey({}, {})", movieId, videoKey);
+        Movie movie = movieRepository.findById(movieId)
+            .orElseThrow(() -> new RuntimeException("Movie not found: " + movieId));
+
+        movie.setVideoKey(videoKey);
+        movie.setVideoStatus(VideoStatus.UPLOADED);
+        movieRepository.save(movie);
+    }
+
+    // .ts playlist containing .m3u8 segments has been created for streaming
+    public void updateHlsUrl(String movieId, String hlsUrl) {
+        log.info("update HLS URL: ({}, {})", movieId, hlsUrl);
+        Movie movie = movieRepository.findById(movieId)
+            .orElseThrow(() -> new RuntimeException("Movie not found: " + movieId));
+
+        movie.setHlsUrl(hlsUrl);
+        movie.setVideoStatus(VideoStatus.READY);
+        movieRepository.save(movie);
+
+        log.info("Movie {} is now ready for streaming", movie.getId());
+    }
+
     // Movie -> MovieResponseDTO
     private MovieResponseDto mapToResponse(Movie movie) {
         MovieResponseDto movieResponseDto = new MovieResponseDto();
