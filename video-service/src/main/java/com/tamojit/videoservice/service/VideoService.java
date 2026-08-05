@@ -21,7 +21,7 @@ public class VideoService {
     private final S3Client s3Client;
     private final KafkaTemplate<String, VideoUploadedEvent> kafkaTemplate;
 
-    @Value("${aws.s3.bucket.name}")
+    @Value("${aws.s3.bucket-name}")
     private String bucketName;
 
     private static final String VIDEO_UPLOADED_TOPIC = "video.uploaded"; // kafka topic
