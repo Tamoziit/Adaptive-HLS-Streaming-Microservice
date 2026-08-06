@@ -16,13 +16,13 @@ Adaptive Bitrate HLS Streaming Architecture in Springboot Microservices Ecosyste
 - Receive multipart video file
 - Generate unique S3 Key
 - Upload file to S3
-- Publish VideoUploadedEvent to Kafka
+- Publish VideoUploadedEvent to `Kafka`
 - Encoding service picks up & starts ffmpeg encoding
 
 **Encoding Pipeline Flow**
-- Download raw video from S3
-- Encode to multiple qualities using ffmpeg
-- Generate HLS playlist (.ts segments) for each quality
-- Create master playlist (master.m3u8 playlist) having pointers to segments for each quality
+- Download raw video from `S3`
+- Encode to multiple qualities using `ffmpeg`
+- Generate HLS playlist (`.ts segments`) for each quality
+- Create master playlist (`master.m3u8` playlist) having pointers to segments for each quality
 - Upload all encoded files back to S3
-- Publish video.encoded event to Kafka
+- Publish `video.encoded` event to Kafka
