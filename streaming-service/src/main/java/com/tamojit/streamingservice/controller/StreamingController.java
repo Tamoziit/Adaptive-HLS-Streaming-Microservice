@@ -36,7 +36,7 @@ public class StreamingController {
     }
 
     // getting signed m3u8 HLS playlist for each quality
-    @GetMapping("/{movieId/playlist")
+    @GetMapping("/{movieId}/playlist")
     public ResponseEntity<String> getSignedPlaylistUrl(
         @PathVariable String movieId,
         @RequestParam String path
