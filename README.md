@@ -26,3 +26,10 @@ Adaptive Bitrate HLS Streaming Architecture in Springboot Microservices Ecosyste
 - Create master playlist (`master.m3u8` playlist) having pointers to segments for each quality
 - Upload all encoded files back to S3
 - Publish `video.encoded` event to Kafka
+
+**Getting streaming URL for a movie**
+- Check `redis` cache for existing pre-signed URL
+- If cached - return immediately
+- If not cached - generate new pre-signed URL from S3
+- Caching the URL in Redis with TTL - *5 mins less than actual expiry time* to avoid overloaded cache misses [avoids `Cache Stampede/Dog-piling`]
+- Return streaming URL
