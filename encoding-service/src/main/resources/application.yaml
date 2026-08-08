@@ -1,6 +1,8 @@
 spring:
   application:
     name: encoding-service
+  config:
+    import: optional:file:.env[.properties]
   kafka:
     bootstrap-servers: localhost:9092
     consumer:

@@ -51,7 +51,7 @@ public class VideoService {
             .build();
 
         s3Client.putObject(putObjectRequest,
-            RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+            RequestBody.fromBytes(file.getBytes()));
         log.info("Video uploaded to S3 successfully: key = {}", videoKey);
 
         // Publishing upload event to kafka - for encoding-service to start ffmpeg encoding

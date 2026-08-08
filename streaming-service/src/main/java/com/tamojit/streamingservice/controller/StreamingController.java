@@ -26,6 +26,7 @@ public class StreamingController {
         String playlistKey = redisTemplate.opsForValue()
             .get(MASTER_PLAYLIST_KEY_PREFIX + movieId);
 
+        log.info(playlistKey);
         if (playlistKey == null) {
             return ResponseEntity.notFound().build();
         }

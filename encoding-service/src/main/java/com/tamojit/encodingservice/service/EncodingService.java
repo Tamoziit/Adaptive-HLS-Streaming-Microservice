@@ -80,7 +80,7 @@ public class EncodingService {
                 int bitrate = qualities[1];
                 int height = qualities[2];
 
-                String qualityDir = jobPath + "/encoded" + height + "p";
+                String qualityDir = jobPath + "/encoded/" + height + "p";
                 Files.createDirectories(Paths.get(qualityDir));
 
                 encodeToHls(localVideoPath, qualityDir, width, height, bitrate);
@@ -163,6 +163,7 @@ public class EncodingService {
 
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.redirectErrorStream(true);
+        processBuilder.inheritIO();
         Process process = processBuilder.start();
 
         int exitCode = process.waitFor();
