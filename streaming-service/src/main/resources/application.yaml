@@ -9,21 +9,22 @@ spring:
       port: 6379
   kafka:
     bootstrap-servers: localhost:9092
-    group-id: streaming-service-group
-    auto-offset-reset: earliest
-    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-    properties:
-      spring:
-        json:
-          trusted:
-            packages: "*"
-          use:
-            type:
-              headers: false
-          value:
-            default:
-              type: com.tamojit.encodingservice.event.VideoEncodedEvent
+    consumer:
+      group-id: streaming-service-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+            use:
+              type:
+                headers: false
+            value:
+              default:
+                type: com.tamojit.streamingservice.event.VideoEncodedEvent
 
 server:
   port: 8084
